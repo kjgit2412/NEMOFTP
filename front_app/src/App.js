@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import CommonLayout from './layouts/CommonLayout';
+import NotFound from './pages/errors/NotFound';
+import Main from './pages/Main';
+import Login from './pages/Login';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Helmet>
+        <title>Novasemi</title>
+      </Helmet>
+      <Routes>
+        <Route element={<CommonLayout />}>
+          <Route index element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
