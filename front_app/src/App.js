@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       <Helmet>
-        <title>Novasemi</title>
+        <title>NOVASEMI</title>
       </Helmet>
       <Routes>
         <Route element={<CommonLayout />}>
