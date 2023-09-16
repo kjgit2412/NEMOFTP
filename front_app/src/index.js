@@ -8,12 +8,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-//import rootReducer from './modules';
+import rootReducer from './modules';
 import reportWebVitals from './reportWebVitals';
 
 const logger = createLogger();
 const store = createStore(
-  // rootReducer,
+  rootReducer,
   composeWithDevTools(applyMiddleware(logger)),
 );
 

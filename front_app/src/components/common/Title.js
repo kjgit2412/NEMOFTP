@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const Box = styled.h1`
   line-height: 1;
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   padding: 10px 0;
   ${(props) =>
     props.align &&

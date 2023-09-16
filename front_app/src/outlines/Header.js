@@ -1,6 +1,7 @@
 import logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { MdLogin } from 'react-icons/md';
 
 const Box = styled.header`
   background: #36466d;
@@ -20,6 +21,12 @@ const Buttons = styled.div`
     font-size: 1.3rem;
     font-weight: 500;
     transition: all 0.3s ease-in;
+    line-height: 1;
+    svg {
+      vertical-align: middle;
+      font-size: 1.3rem;
+      margin-right: 5px;
+    }
   }
   a + a {
     margin-left: 5px;
@@ -27,6 +34,9 @@ const Buttons = styled.div`
   a:hover {
     background: #000;
     color: #fff;
+    * {
+      color: #fff;
+    }
   }
 `;
 
@@ -38,7 +48,10 @@ const Header = () => {
           <img src={logo} alt="logo" />
         </Link>
         <Buttons>
-          <Link to="/login">로그인</Link>
+          <Link to="/login">
+            <MdLogin />
+            로그인
+          </Link>
           <Link to="/join">회원가입</Link>
         </Buttons>
       </div>
