@@ -1,1 +1,44 @@
+server:
+  port: 3000
 
+spring:
+  devtools: # 라이브 리로드 설정
+    livereload:
+      enable: true
+  thymeleaf: # 타임리프 설정
+    cache: false
+    prefix: file:src/main/resources/templates/
+  resources: # 정적 자원 설정(CSS, JS, Images)
+    staticLocations: file:src/main/resources/templates/
+  servlet:
+    multipart: # 파일 업로드 설정
+      maxFileSize: 20MB
+      maxRequestSize: 60MB
+  datasource: # 데이터 베이스 연결 설정
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/NEMOFTP
+      username: NEMOFTP
+      password: _aA123456
+  jpa:
+    properties:
+      hibernate:
+        # 실행되는 쿼리 콘솔 출력
+        showSql: true
+        # 콘솔 창에 출력되는 쿼리를 가독성 좋게 포맷팅
+        formatSql: true
+        ddlAuto: create
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+# 파일 업로드 경로 설정
+file:
+  upload:
+    - path: C:/uploads/
+    - url: /uploads/
