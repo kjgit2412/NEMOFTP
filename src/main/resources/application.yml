@@ -42,3 +42,9 @@ file:
   upload:
     - path: C:/uploads/
     - url: /uploads/
+
+# JSON WebToken 설정
+jwt:
+  header: Authorization
+  secret: rutyweorituwyerotiuweyrtoiuweyrtoweiurtywoeighdfsojkghsdfgsdofiguwyertouw | base64 YWprbGdoc2Rma2xnanNkaGZnbGprc2RmZ2hsc2
+  accessTokenValidityInSeconds: 600 # 10분

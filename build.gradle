@@ -36,6 +36,10 @@ dependencies {
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 	runtimeOnly 'com.mysql:mysql-connector-j:8.0.33'
 
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
 	testImplementation 'com.h2database:h2'
