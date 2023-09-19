@@ -1,7 +1,5 @@
-package org.nemoftp.configs;
+package org.nemoftp.jwt;
 
-import org.nemoftp.jwt.JwtProperties;
-import org.nemoftp.jwt.TokenProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
