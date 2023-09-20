@@ -1,10 +1,7 @@
 package org.nemoftp.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +40,12 @@ public class Member extends CommonInfo {
     @Column(length=100)
     private String addressSub;
 
+    private boolean expired;
+    private boolean locked;
+    private boolean credentialExpired;
+    private boolean enabled;
+
+    @ToString.Exclude
     @ManyToMany(fetch=FetchType.LAZY)
     private List<Authorities> authorities = new ArrayList<>();
 }

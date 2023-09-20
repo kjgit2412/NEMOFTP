@@ -1,43 +1,55 @@
 package org.nemoftp.models.member;
 
+import lombok.Builder;
+import lombok.Data;
+import org.nemoftp.entities.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Data
+@Builder
 public class MemberInfo implements UserDetails {
+
+    private String email;
+    private String name;
+    private Member member;
+
+    private Collection<GrantedAuthority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return member.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return member.getEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return !member.isExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return !member.isLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return !member.isCredentialExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return !member.isEnabled();
     }
 }
