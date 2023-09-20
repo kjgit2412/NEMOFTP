@@ -28,7 +28,8 @@ spring:
         formatSql: true
         ddlAuto: create
         dialect: org.hibernate.dialect.MySQLDialect
-
+    hibernate:
+      ddlAuto: create
 logging:
   level:
     org:
