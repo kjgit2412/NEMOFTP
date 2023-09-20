@@ -1,13 +1,13 @@
 package org.nemoftp.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data @Builder
@@ -42,4 +42,7 @@ public class Member extends CommonInfo {
 
     @Column(length=100)
     private String addressSub;
+
+    @ManyToMany(fetch=FetchType.LAZY)
+    private List<Authorities> authorities = new ArrayList<>();
 }

@@ -1,12 +1,13 @@
 package org.nemoftp.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data @Builder
@@ -18,4 +19,7 @@ public class Authorities {
     @Column(name="_role", length=30)
     private String role;
     private String description;
+
+    @ManyToMany(mappedBy="authorities", fetch=FetchType.LAZY)
+    private List<Member> members = new ArrayList<>();
 }
