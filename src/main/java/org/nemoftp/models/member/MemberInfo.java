@@ -16,7 +16,7 @@ public class MemberInfo implements UserDetails {
     private String name;
     private Member member;
 
-    private Collection<GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

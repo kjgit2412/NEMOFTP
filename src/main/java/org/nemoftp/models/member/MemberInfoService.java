@@ -26,10 +26,7 @@ public class MemberInfoService implements UserDetailsService {
         }
 
         List<Authorities> auths = member.getAuthorities();
-        List<GrantedAuthority> authorities = auths == null ? null : auths.stream().map(a -> {
-            GrantedAuthority auth = new SimpleGrantedAuthority(a.getCode());
-            return auth;
-        }).toList();
+        List<? extends GrantedAuthority> authorities = auths == null ? null : auths.stream().map(a -> new SimpleGrantedAuthority(a.getCode())).toList();
 
 
         return MemberInfo.builder()
