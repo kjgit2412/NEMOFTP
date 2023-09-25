@@ -22,7 +22,7 @@ const JoinForm = () => {
 
     return (
         <>
-        <OuterBox className='layout_width'>
+        <OuterBox className='layout_width' minHeight="700">
             <InnerBox width={350}>
                 <Title align="center">회원가입</Title>
                 <input type="text" name="email" placeholder="이메일" onChange={handleChange} />
