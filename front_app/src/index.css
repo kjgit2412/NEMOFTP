@@ -9,3 +9,12 @@ li { margin: 0; }
 dl, dt, dd { margin: 0; padding: 0; }
 .layout_width { max-width: 1450px; min-width: 1200px; margin: 0 auto; }
 .content_box { background: #fff; min-height: 550px; padding: 15px; }
+
+/* 공통 너비 */
+.w200 { width: 200px !important; }
+.w300 { width: 300px !important }
+
+/* 정렬 */
+.ac { text-align: center; }
+.al { text-align: left; }
+.ar { text-align: right; }
