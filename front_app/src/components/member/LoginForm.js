@@ -1,30 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Title from '../common/Title';
 import StyledButton1 from '../common/StyledButton1';
 import ErrorMessage from '../common/ErrorMessage';
-const OuterBox = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const InnerBox = styled.div`
-  width: 350px;
-  margin: 10px auto 0 auto;
-  input {
-    width: 100%;
-    display: block;
-    border: 1px solid #d5d5d5;
-    height: 45px;
-    border-radius: 3px;
-    margin-bottom: 5px;
-    text-align: center;
-    font-size: 1.15rem;
-  }
-  input:focus {
-    border: 1px solid #36466d;
-  }
-`;
+import { OuterBox, InnerBox } from '../common/LayoutBox';
 
 const LoginForm = () => {
   const [form, setForm] = useState({ email: '', password: '' });
