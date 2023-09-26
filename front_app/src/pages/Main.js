@@ -1,9 +1,7 @@
+import MainContainer from "../containers/MainContainer";
 const Main = () => {
-  return (
-    <div className="layout_width content_box">
-      <div>메인페이지</div>
-    </div>
-  );
+
+  return <MainContainer />
 };
 
 export default Main;
