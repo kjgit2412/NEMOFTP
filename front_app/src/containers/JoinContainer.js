@@ -1,8 +1,13 @@
 import {connect} from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import JoinForm from '../components/member/JoinForm';
 
 const JoinContainer = ({ isLogin }) => {
-    return <JoinForm isLogin={isLogin} />;
+    if (isLogin) {
+        return <Navigate to="/" replace={true} />;
+    }
+
+    return <JoinForm />;
 };
 
 

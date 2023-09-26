@@ -3,8 +3,8 @@ import styled, {css} from 'styled-components';
 export const OuterBox = styled.div`
   display: flex;
   align-items: center;
-  ${props => props.minHeight && css`
-    min-height: ${props.minHeight}px;
+  ${props => props.minheight && css`
+    min-height: ${props.minheight}px;
   `}
 `;
 
