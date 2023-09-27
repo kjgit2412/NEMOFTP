@@ -3,6 +3,7 @@ import Title from '../common/Title';
 import StyledButton1 from '../common/StyledButton1';
 import ErrorMessage from '../common/ErrorMessage';
 import {OuterBox, InnerBox} from '../common/LayoutBox'
+import { emailValidator, mobileValidator } from '../../lib/validators';
 
 const initialForm = {
     email : '',
@@ -24,7 +25,7 @@ const JoinForm = () => {
     const [ form, setForm ] = useState(initialForm);
 
     const handleChange = useCallback((e) => {
-        setForm({...form, [e.target.name] : e.target.value});
+        setForm({...form, [e.target.name] : e.target.value.trim()});
     }, [form, setForm]);
 
     /**
@@ -33,17 +34,37 @@ const JoinForm = () => {
      */
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
+        /* 유효성 검사 S */
        try {
             for (const key in validationFields) {
-                if (!form[key] || !form[key].trim()) {
-                    setMessage(validationFields[key]);
+                if (!form[key]) {
                     e.target[key].focus();
-                    break;
+                    throw new Error(validationFields[key]);
+                }
+
+                if (key === 'email' && !emailValidator(form[key])) {
+                    e.target[key].focus();
+                    throw new Error("이메일 형식이 아닙니다.");
                 }
             }
+            
+            /* 비밀번호, 비밀번호 확인 처리 */
+            if (form.password !== form.confirmPassword) {
+                e.target.confirmPassword.focus();
+                throw new Error("비밀번호가 일치하지 않습니다.");
+            }
+
+            /* 휴대전화번호 형식 체크 */
+            if (form.cellPhone && !mobileValidator(form.cellPhone)) {
+                e.target.cellPhone.focus();
+                throw new Error("휴대전화번호 형식이 아닙니다.");
+            } 
+            
+            setMessage("");
        } catch (err) {
             setMessage(err.message);  
        }
+       /* 유효성 검사 E */
     }, [form]);
 
     return (

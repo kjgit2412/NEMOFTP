@@ -12,7 +12,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     inputEmail.current.focus();
-  }, []);
+  }, [inputEmail]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
