@@ -4,7 +4,6 @@ import StyledButton1 from '../common/StyledButton1';
 import ErrorMessage from '../common/ErrorMessage';
 import {OuterBox, InnerBox} from '../common/LayoutBox'
 import { emailValidator, mobileValidator } from '../../lib/validators';
-
 const initialForm = {
     email : '',
     password: '',
