@@ -3,8 +3,11 @@ import Title from '../common/Title'
 import StyledButton1 from '../common/StyledButton1'
 import ErrorMessage from '../common/ErrorMessage'
 import { OuterBox, InnerBox } from '../common/LayoutBox'
+import { useTranslation } from 'react-i18next'
 
 const LoginForm = () => {
+  const { t } = useTranslation()
+
   const [form, setForm] = useState({ email: '', password: '' })
   const [message, setMessage] = useState('');
   const inputEmail = React.createRef<HTMLInputElement>()
@@ -22,7 +25,7 @@ const LoginForm = () => {
 
   const onProcess = () => {
     if (!form.email.trim()) {
-      setMessage('이메일을 입력하세요.');
+      setMessage(t('required_email'));
       if (inputEmail.current) 
         inputEmail.current.focus();
 
@@ -30,7 +33,7 @@ const LoginForm = () => {
     }
 
     if (!form.password.trim()) {
-      setMessage('비밀번호를 입력하세요.')
+      setMessage(t('required_password'))
 
       if (inputPassword.current)
         inputPassword.current.focus();
@@ -40,23 +43,23 @@ const LoginForm = () => {
     <>
       <OuterBox className="layout_width content_box">
         <InnerBox>
-          <Title align="center">관리자 로그인</Title>
+          <Title align="center">{t('login_title')}</Title>
           <input
             type="text"
             name="email"
-            placeholder="이메일 주소 입력"
+            placeholder={t('login_email')}
             onChange={handleChange}
             ref={inputEmail}
           />
           <input
             type="password"
             name="password"
-            placeholder="비밀번호 입력"
+            placeholder={t('login_password')}
             onChange={handleChange}
             ref={inputPassword}
           />
           {message && <ErrorMessage>{message}</ErrorMessage>}
-          <StyledButton1 onClick={onProcess}>로그인</StyledButton1>
+          <StyledButton1 onClick={onProcess}>{t('login')}</StyledButton1>
         </InnerBox>
       </OuterBox>
     </>

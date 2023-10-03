@@ -4,10 +4,10 @@ import ko from './langs/ko'
 import en from './langs/en'
 const resources = {
     en: {
-        translation: ko,
+        translation: en,
     },
     ko: {
-        translation: en,
+        translation: ko,
     }
 }
 

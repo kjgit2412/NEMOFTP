@@ -2,6 +2,7 @@ import logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { MdLogin } from 'react-icons/md';
+import { useTranslation } from 'react-i18next'
 
 const Box = styled.header`
   background: #36466d;
@@ -41,6 +42,8 @@ const Buttons = styled.div`
 `;
 
 const Header = (): JSX.Element => {
+  const { t } = useTranslation()
+
   return (
     <Box>
       <div className="layout_width">
@@ -50,9 +53,9 @@ const Header = (): JSX.Element => {
         <Buttons>
           <Link to="/login">
             <MdLogin />
-            로그인
+            {t('login')}
           </Link>
-          <Link to="/join">회원가입</Link>
+          <Link to="/join">{t('join')}</Link>
         </Buttons>
       </div>
     </Box>
