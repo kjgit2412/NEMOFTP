@@ -33,7 +33,12 @@ public class MemberController {
      * @return
      */
     @PostMapping("/token")
-    public ResponseEntity<JSONData<ResponseLogin>> authorize(@Valid @RequestBody RequestLogin requestLogin) {
+    public ResponseEntity<JSONData<ResponseLogin>> authorize(@Valid @RequestBody RequestLogin requestLogin, Errors errors) {
+        if (errors.hasErrors()) {
+            String message = errors.getAllErrors().stream().map(ObjectError::getDefaultMessage).findFirst().get();
+            throw new BadRequestException(message);
+        }
+
         ResponseLogin token = loginService.authenticate(requestLogin.email(), requestLogin.password());
 
         HttpHeaders headers = new HttpHeaders();

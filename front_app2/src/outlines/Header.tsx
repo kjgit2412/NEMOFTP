@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 const Box = styled.header`
   background: #36466d;
   padding: 10px 0;
+  min-width: 1200px;
   .layout_width {
     display: flex;
     align-items: center;

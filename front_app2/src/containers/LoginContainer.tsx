@@ -5,10 +5,9 @@ import LoginForm from '../components/member/LoginForm';
 
 type LoginProps = {
   isLogin?: boolean,
-  login?: Function
 }
 
-const LoginContainer = ({ isLogin, login }: LoginProps) => {
+const LoginContainer = ({ isLogin }: LoginProps) => {
   if (isLogin) {
     return <Navigate to="/" replace={true} />;
   }
@@ -20,7 +19,5 @@ export default connect(
   (state : any) => ({
     isLogin: state.user.isLogin,
   }),
-  {
-    login,
-  },
+  {},
 )(LoginContainer);

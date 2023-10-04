@@ -21,3 +21,8 @@ export type JoinFormType = {
     name: string
     cellPhone: string
 }
+
+export type LoginFormType = {
+    email : string
+    password: string
+}

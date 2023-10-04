@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Box = styled.footer`
   background: #eee;
   padding: 20px 0;
+  min-width: 1200px;
   .layout_width {
     align-items: center;
     display: flex;

@@ -123,7 +123,7 @@ const JoinForm = () => {
 
     return (
         <>
-        <OuterBox className='layout_width' minheight={700}>
+        <OuterBox className='layout_width content_box' minheight={700}>
             <InnerBox width={350}>
                 <Title align="center">{t('join_title')}</Title>
                 <form autoComplete='off' onSubmit={handleSubmit}>
