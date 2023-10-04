@@ -7,4 +7,6 @@ export default {
     format_password: "비밀번호는 8자 이상의 대소문자 포함 알파벳, 숫자, 특수문자로 입력하세요.",
     format_cellPhone: "휴대전화번호 형식이 아닙니다.",
     mismatch_password: "비밀번호가 일치하지 않습니다.",
+    notfound_email: "등록되지 않은 이메일 입니다.",
+    duplicated_email: "이미 등록된 이메일 입니다.",
 } as {}

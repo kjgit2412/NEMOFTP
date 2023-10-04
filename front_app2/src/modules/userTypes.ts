@@ -1,15 +1,23 @@
 export interface UserInfo {
-    token: string
+    token?: string
     userNo: number
     email: string
     userNm: string
     type: string
     company: string
     department: string
-    mobile: string
+    cellPhone: string
 }
 export type UserActionType = 'user/LOGIN' | 'user/LOGOUT'
 export type UserInitialState = {
     isLogin: boolean
     userInfo: UserInfo
+}
+
+export type JoinFormType = {
+    email : string
+    password: string
+    confirmPassword: string
+    name: string
+    cellPhone: string
 }

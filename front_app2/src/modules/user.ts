@@ -18,7 +18,7 @@ const initialState: UserInitialState = {
       type: '',
       company: '',
       department: '',
-      mobile: '',
+      cellPhone: '',
     },
 }
 

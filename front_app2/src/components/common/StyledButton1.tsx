@@ -1,7 +1,14 @@
 import { ButtonHTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-const Button = styled.button`
+type ButtonProps = ButtonHTMLAttributes<any> & {
+  children?:any
+  onClick?: Function
+  className?: string
+  type?: string
+}
+
+const StyledButton1 = styled.button<ButtonProps>`
   line-height: 1;
   background: #36466d;
   display: block;
@@ -22,20 +29,5 @@ const Button = styled.button`
     vertical-align: middle;
   }
 `;
-
-type ButtonProps = ButtonHTMLAttributes<any> & {
-  children?:any
-  onClick?: Function
-  className?: string
-  type?: string
-}
-
-const StyledButton1 = ({ children, onClick, className, type }: ButtonProps) : JSX.Element => {
-  return (
-    <Button type={type || 'button'} onClick={onClick} className={className}>
-      {children}
-    </Button>
-  );
-};
 
 export default StyledButton1;

@@ -36,4 +36,13 @@ public class MemberInfoService implements UserDetailsService {
                 .authorities(authorities)
                 .build();
     }
+
+    /**
+     * 등록회원인지 이메일로 체크
+     * @param email
+     * @return
+     */
+    public boolean exists(String email) {
+        return repository.exists(email);
+    }
 }

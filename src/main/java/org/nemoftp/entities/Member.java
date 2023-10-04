@@ -1,5 +1,6 @@
 package org.nemoftp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,7 @@ public class Member extends CommonInfo {
     @Column(length=80, unique = true, nullable = false)
     private String email;
 
+    @JsonIgnore
     @Column(length=65, nullable = false)
     private String password;
 
