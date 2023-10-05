@@ -3,13 +3,15 @@ package org.nemoftp.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.nemoftp.models.member.MemberInfo;
+import org.nemoftp.models.member.MemberInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -28,6 +30,9 @@ public class TokenProvider {
     protected final String secret;
     protected final long tokenValidityInMilliseconds;
 
+    @Autowired
+    private MemberInfoService memberInfoService;
+
     protected Key key;
     public TokenProvider(String secret, long tokenValidityInMilliseconds) {
         this.secret = secret;
@@ -44,8 +49,7 @@ public class TokenProvider {
                 .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
-        Date validity = new Date(now + this.tokenValidityInMilliseconds);
-
+        Date validity = new Date(now + this.tokenValidityInMilliseconds * 1000);
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
@@ -68,8 +72,8 @@ public class TokenProvider {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        // 디비를 거치지 않고 토큰에서 값을 꺼내 바로 시큐리티 유저 객체를 만들어 Authentication을 만들어 반환하기에 유저네임, 권한 외 정보는 알 수 없다.
-        User principal = new User(claims.getSubject(), "", authorities);
+        MemberInfo principal = (MemberInfo)memberInfoService.loadUserByUsername(claims.getSubject());
+        principal.setAuthorities(authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }

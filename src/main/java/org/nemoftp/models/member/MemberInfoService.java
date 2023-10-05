@@ -1,7 +1,6 @@
 package org.nemoftp.models.member;
 
 import lombok.RequiredArgsConstructor;
-import org.nemoftp.entities.Authorities;
 import org.nemoftp.entities.Member;
 import org.nemoftp.repositories.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -25,10 +25,10 @@ public class MemberInfoService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
 
-        List<Authorities> auths = member.getAuthorities();
-        List<? extends GrantedAuthority> authorities = auths == null ? null : auths.stream().map(a -> new SimpleGrantedAuthority(a.getCode())).toList();
+        //List<Authorities> auths = member.getAuthorities();
+        //List<? extends GrantedAuthority> authorities = auths == null ? Arrays.asList(new SimpleGrantedAuthority("USER")) : auths.stream().map(a -> new SimpleGrantedAuthority(a.getCode())).toList();
 
-
+        List<? extends GrantedAuthority> authorities =  Arrays.asList(new SimpleGrantedAuthority("USER"));
         return MemberInfo.builder()
                 .email(member.getEmail())
                 .name(member.getName())

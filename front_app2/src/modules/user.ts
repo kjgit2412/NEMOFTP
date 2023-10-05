@@ -2,36 +2,39 @@ import { createAction, handleActions } from 'redux-actions'
 import { produce } from 'immer'
 import { UserActionType, UserInitialState, UserInfo } from './userTypes'
 
-const LOGIN: UserActionType = 'user/LOGIN'
+const UPDATE: UserActionType = 'user/UPDATE'
 const LOGOUT: UserActionType = 'user/LOGOUT'
 
-export const login = createAction(LOGIN)
+const initialState: UserInitialState = {
+  isLogin: false,
+  userInfo: {
+    token: '',
+    userNo: 0,
+    email: '',
+    userNm: '',
+    type: '',
+    company: '',
+    department: '',
+    cellPhone: '',
+  },
+}
+
+export const updateUserInfo = createAction(UPDATE, (userInfo : UserInfo) : UserInfo => userInfo)
 export const logout = createAction(LOGOUT)
 
-const initialState: UserInitialState = {
-    isLogin: false,
-    userInfo: {
-      token: '',
-      userNo: 0,
-      email: '',
-      userNm: '',
-      type: '',
-      company: '',
-      department: '',
-      cellPhone: '',
-    },
-}
 
 const user = handleActions(
     {
-      [LOGIN]: (state, { payload: userInfo } : { payload: UserInfo }) =>
+      [UPDATE]: (state, { payload : userInfo } : { payload : UserInfo })  => 
         produce(state, (draft: UserInitialState) => {
-          draft.userInfo = userInfo;
-          draft.isLogin = true;
+          if (userInfo) {
+            draft.isLogin = true
+            draft.userInfo = userInfo
+          }
         }),
       [LOGOUT]: (state) =>
         produce(state, (draft) => {
-          draft.isLogin = false;
+          draft.isLogin = false
           draft.userInfo = { ...initialState.userInfo }
         }),
     },

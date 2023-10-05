@@ -1,4 +1,5 @@
- import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Title from '../common/Title'
 import StyledButton1 from '../common/StyledButton1'
 import ErrorMessage from '../common/ErrorMessage'
@@ -6,9 +7,10 @@ import { OuterBox, InnerBox } from '../common/LayoutBox'
 import { useTranslation } from 'react-i18next'
 import { loginProcess } from '../../api/member/login'
 import { LoginFormType  } from '../../modules/userTypes'
-const LoginForm = () => {
+import cookie from 'react-cookies'
+const LoginForm = ({updateUserInfo}) => {
   const { t } = useTranslation()
-
+  const navigate = useNavigate()
   const [form, setForm] = useState({ email: '', password: '' } as LoginFormType)
   const [message, setMessage] = useState('');
   const inputEmail = React.createRef<HTMLInputElement>()
@@ -43,14 +45,27 @@ const LoginForm = () => {
     }
     
     try {
-      const res = await loginProcess(form)
-      console.log(res)
+      /** 로그인 처리 S */
+      const token = await loginProcess(form)
+      const expires = new Date()
+      expires.setDate(expires.getDate() + 7)
+      cookie.save("token", token, {
+          path : '/',
+          expires,
+          //httpOnly: true
+      })
+
+      setForm({email: '', password: ''})
+      navigate("/", {replace: true})
+      updateUserInfo()
+      /** 로그인 처리 E */
+
     } catch (err: any) {
-      setMessage(err.message)
+      if (err.message === 'login_fail') setMessage(t(err.message))
+      else setMessage(err.message)
     }
-
-
   };
+
   return (
     <>
       <OuterBox className="layout_width content_box">
@@ -63,6 +78,7 @@ const LoginForm = () => {
                 placeholder={t('login_email')}
                 onChange={handleChange}
                 ref={inputEmail}
+                value={form.email}
               />
               <input
                 type="password"
@@ -70,6 +86,7 @@ const LoginForm = () => {
                 placeholder={t('login_password')}
                 onChange={handleChange}
                 ref={inputPassword}
+                value={form.password}
               />
               {message && <ErrorMessage>{message}</ErrorMessage>}
               <StyledButton1 type="submit">{t('login')}</StyledButton1>
