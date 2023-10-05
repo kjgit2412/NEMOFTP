@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { loginProcess } from '../../api/member/login'
 import { LoginFormType  } from '../../modules/userTypes'
 import cookie from 'react-cookies'
-const LoginForm = ({updateUserInfo}) => {
+const LoginForm = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [form, setForm] = useState({ email: '', password: '' } as LoginFormType)
@@ -57,7 +57,6 @@ const LoginForm = ({updateUserInfo}) => {
 
       setForm({email: '', password: ''})
       navigate("/", {replace: true})
-      updateUserInfo()
       /** 로그인 처리 E */
 
     } catch (err: any) {

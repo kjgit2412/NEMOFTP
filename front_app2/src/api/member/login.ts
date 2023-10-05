@@ -22,6 +22,10 @@ export const loginProcess = (form: LoginFormType): Promise<string> => new Promis
 /** 회원정보 조회  */
 export const getLoginInfo = () : Promise<UserInfo> => new Promise<UserInfo>((resolve, reject) => {
     const token = cookie.load('token')
+    if (!token) {
+        reject("login.fail")
+        return;
+    }
     const headers = {
         Authorization : `Bearer ${token}`
     }
