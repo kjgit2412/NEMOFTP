@@ -1,5 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useNavigate, Link } from 'react-router-dom'
+import { FiLock, FiKey, FiUserPlus } from 'react-icons/fi'
 import Title from '../common/Title'
 import StyledButton1 from '../common/StyledButton1'
 import ErrorMessage from '../common/ErrorMessage'
@@ -7,6 +10,9 @@ import { OuterBox, InnerBox } from '../common/LayoutBox'
 import { useTranslation } from 'react-i18next'
 import { loginProcess } from '../../api/member/login'
 import { LoginFormType  } from '../../modules/userTypes'
+import { updateUserInfo } from '../../modules/user'
+import { getLoginInfo } from '../../api/member/login'
+import { UserInfo } from '../../modules/userTypes'
 import cookie from 'react-cookies'
 const LoginForm = () => {
   const { t } = useTranslation()
@@ -15,6 +21,8 @@ const LoginForm = () => {
   const [message, setMessage] = useState('');
   const inputEmail = React.createRef<HTMLInputElement>()
   const inputPassword = React.createRef<HTMLInputElement>()
+  
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (inputEmail.current)
@@ -56,6 +64,10 @@ const LoginForm = () => {
       })
 
       setForm({email: '', password: ''})
+      getLoginInfo()
+        .then((userInfo: UserInfo) => dispatch(updateUserInfo(userInfo)))
+        .catch((err) => console.error(err))
+
       navigate("/", {replace: true})
       /** 로그인 처리 E */
 
@@ -90,10 +102,24 @@ const LoginForm = () => {
               {message && <ErrorMessage>{message}</ErrorMessage>}
               <StyledButton1 type="submit">{t('login')}</StyledButton1>
           </form>
+          <div>
+            <Link to="/findId">
+              <FiLock />
+              {t('findId')}
+            </Link>
+            <Link to="/findPw">
+              <FiKey />
+              {t('findPw')}
+            </Link>
+            <Link to="/join">
+              <FiUserPlus />
+              {t('join')}
+            </Link>
+          </div>
         </InnerBox>
       </OuterBox>
     </>
   );
 };
 
-export default LoginForm;
+export default React.memo(LoginForm)

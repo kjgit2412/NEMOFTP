@@ -1,0 +1,10 @@
+main.flex { 
+    display: flex; 
+    aside {
+        width: 200px;
+        background: #eee;
+    }
+    aside+div {
+        flex-grow: 1;
+    }   
+}

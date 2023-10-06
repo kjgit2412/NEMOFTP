@@ -8,7 +8,7 @@ export interface UserInfo {
     department: string
     cellPhone: string
 }
-export type UserActionType = 'user/UPDATE' | 'user/LOGOUT'
+export type UserActionType = 'user/UPDATE' | 'user/LOGOUT' | 'user/INFO'
 export type UserInitialState = {
     isLogin: boolean
     userInfo: UserInfo

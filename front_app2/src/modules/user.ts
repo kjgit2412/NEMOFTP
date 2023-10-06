@@ -1,9 +1,11 @@
 import { createAction, handleActions } from 'redux-actions'
 import { produce } from 'immer'
 import { UserActionType, UserInitialState, UserInfo } from './userTypes'
+import cookie from 'react-cookies'
 
 const UPDATE: UserActionType = 'user/UPDATE'
 const LOGOUT: UserActionType = 'user/LOGOUT'
+const INFO : UserActionType = 'user/INFO'
 
 const initialState: UserInitialState = {
   isLogin: false,
@@ -21,7 +23,7 @@ const initialState: UserInitialState = {
 
 export const updateUserInfo = createAction(UPDATE, (userInfo : UserInfo) : UserInfo => userInfo)
 export const logout = createAction(LOGOUT)
-
+export const getUserInfo = createAction(INFO)
 
 const user = handleActions(
     {
@@ -36,7 +38,9 @@ const user = handleActions(
         produce(state, (draft) => {
           draft.isLogin = false
           draft.userInfo = { ...initialState.userInfo }
+          cookie.remove('token')
         }),
+      [INFO]: (state: UserInitialState) : UserInitialState => state 
     },
     initialState,
   )

@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-
+import { connect } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+import classNames from 'classnames'
 
 type MainProps = {
     isLogin : boolean
@@ -8,10 +8,10 @@ type MainProps = {
 
 const MainContainer = ({ isLogin } : MainProps) : JSX.Element => {
     if (!isLogin) {
-        return <Navigate to="/login" replace={true} />;
+        return <Navigate to="/login" replace={true} />
     }
     return (
-        <div className="layout_width content_box">
+        <div className={classNames('content_box', {layout_width: !isLogin})}>
             <div>메인페이지</div>
         </div>
     );
@@ -22,4 +22,4 @@ export default connect(
         isLogin: state.user.isLogin
     }),
     {}
-)(MainContainer);
+)(MainContainer)

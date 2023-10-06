@@ -1,3 +1,4 @@
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
@@ -13,4 +14,4 @@ const LoginContainer = () : JSX.Element => {
   return <LoginForm />;
 };
 
-export default LoginContainer;
+export default React.memo(LoginContainer)

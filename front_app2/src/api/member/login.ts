@@ -48,7 +48,11 @@ export const getLoginInfo = () : Promise<UserInfo> => new Promise<UserInfo>((res
                 resolve(userInfo)
             } else {
                 reject("login.fail")
+                cookie.remove("token")
             }
         })
-        .catch((err) => reject(err))
+        .catch((err) => {
+            reject(err)
+            cookie.remove("token")
+        })
 })

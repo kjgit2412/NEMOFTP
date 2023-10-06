@@ -48,4 +48,4 @@ file:
 jwt:
   header: Authorization
   secret: YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd6eXoxMjMxMjMxMjMxMjMxMjMxMzEyMzEyMzEzMTIzMTIzMTIzMTMxMjMxMzEzMTMxMjM
-  accessTokenValidityInSeconds: 600 # 10 min
+  accessTokenValidityInSeconds: 3600 # 60 min

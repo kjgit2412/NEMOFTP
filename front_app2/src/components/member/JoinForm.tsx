@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect    } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useCallback, useEffect    } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Title from '../common/Title'
@@ -143,4 +144,4 @@ const JoinForm = () => {
     )
 }
 
-export default JoinForm
+export default React.memo(JoinForm)
