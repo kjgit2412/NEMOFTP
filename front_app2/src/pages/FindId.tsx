@@ -1,5 +1,16 @@
+import { Helmet } from "react-helmet-async"
+import { useTranslation } from "react-i18next"
+import FindIdContainer from "../containers/FindIdContainer"
 const FindId = () => {
-    return <h1>아이디 찾기</h1>
+    const { t } = useTranslation()
+    return (
+        <>
+            <Helmet>
+                <title>{t('findId')}</title>
+            </Helmet>
+            <FindIdContainer />
+        </>
+    )
 }
 
 export default FindId

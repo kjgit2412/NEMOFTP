@@ -3,6 +3,7 @@ import React, {useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import { FiLock, FiKey, FiUserPlus } from 'react-icons/fi'
+import styled from 'styled-components'
 import Title from '../common/Title'
 import StyledButton1 from '../common/StyledButton1'
 import ErrorMessage from '../common/ErrorMessage'
@@ -14,6 +15,29 @@ import { updateUserInfo } from '../../modules/user'
 import { getLoginInfo } from '../../api/member/login'
 import { UserInfo } from '../../modules/userTypes'
 import cookie from 'react-cookies'
+
+
+const Links = styled.div`
+    display: flex;
+    padding: 10px;
+    background: #fff;
+    border-bottom: 1px solid #d5d5d5;
+    a {
+      flex-grow: 1; 
+      width: 0;
+      text-align: center;
+      svg { 
+        vertical-align: middle;
+        position: relative; 
+        top: -2px;
+        margin-right: 3px;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+`;
+
 const LoginForm = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -22,6 +46,8 @@ const LoginForm = () => {
   const inputEmail = React.createRef<HTMLInputElement>()
   const inputPassword = React.createRef<HTMLInputElement>()
   
+  
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -102,7 +128,7 @@ const LoginForm = () => {
               {message && <ErrorMessage>{message}</ErrorMessage>}
               <StyledButton1 type="submit">{t('login')}</StyledButton1>
           </form>
-          <div>
+          <Links>
             <Link to="/findId">
               <FiLock />
               {t('findId')}
@@ -115,7 +141,7 @@ const LoginForm = () => {
               <FiUserPlus />
               {t('join')}
             </Link>
-          </div>
+          </Links>
         </InnerBox>
       </OuterBox>
     </>
