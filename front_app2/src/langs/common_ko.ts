@@ -9,6 +9,8 @@ export default {
     // 회원가입
     join: "회원가입",
     join_title: "회원가입",
+    join_terms: "회원가입 약관",
+    join_agree_terms: "회원가입 약관에 동의합니다.",
 
     // 로그인, 아이디 찾기, 비밀번호 찾기
     login: "로그인",

@@ -20,6 +20,7 @@ export type JoinFormType = {
     confirmPassword: string
     name: string
     cellPhone: string
+    agree: boolean
 }
 
 export type LoginFormType = {

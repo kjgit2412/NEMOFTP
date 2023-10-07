@@ -13,7 +13,7 @@ export const loginProcess = (form: LoginFormType): Promise<string> => new Promis
                 const token = res.data.data.accessToken
                 resolve(token)
             } else {
-                reject("login_fail")
+                reject(res.data)
             } 
             
         })
@@ -44,10 +44,10 @@ export const getLoginInfo = () : Promise<UserInfo> => new Promise<UserInfo>((res
                     department: data.department,
                     cellPhone: data.cellPhone
                 }
-                
+    
                 resolve(userInfo)
             } else {
-                reject("login.fail")
+                reject(res.data)
                 cookie.remove("token")
             }
         })

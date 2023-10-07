@@ -76,6 +76,8 @@ const LoginForm = () => {
 
       if (inputPassword.current)
         inputPassword.current.focus();
+
+      return;
     }
     
     try {

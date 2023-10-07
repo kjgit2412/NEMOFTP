@@ -9,6 +9,8 @@ export default function apiRequest(url:string, method?:string, data?:{}, headers
         method,
         url,
         data,
-        headers
+        headers,
+        validateStatus: (state) => state < 500
     })
+    
 }

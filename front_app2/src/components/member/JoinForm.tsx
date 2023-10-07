@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, useEffect    } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { FiSquare, FiCheckSquare } from 'react-icons/fi'
 import Title from '../common/Title'
+import { TermsBox, TermsAgree } from '../common/TermsStyle'
 import StyledButton1 from '../common/StyledButton1'
 import ErrorMessage from '../common/ErrorMessage'
 import {OuterBox, InnerBox} from '../common/LayoutBox'
@@ -16,7 +17,8 @@ const initialForm : JoinFormType = {
     password: '',
     confirmPassword: '',
     name: '',
-    cellPhone: ''
+    cellPhone: '',
+    agree: false,
 }
 
 const validationFields = {
@@ -44,7 +46,11 @@ const JoinForm = () => {
 
     const handleChange = useCallback((e) => {
         setForm({...form, [e.target.name] : e.target.value.trim()})
-    }, [form, setForm])
+    }, [form])
+
+    const toggleAgree = useCallback(() => {
+        setForm({...form, agree: !form.agree})
+    }, [form])
 
     /**
      * 가입 처리 
@@ -66,6 +72,8 @@ const JoinForm = () => {
                 }
             }
 
+
+
             const password = form.password;
             /* 비밀번호 자리수 및 복잡성 체크 */
             if (password.length < 8 || !passwordAlphaCheck(password) || !passwordNumberCheck(password) || !passwordSpecialCharCheck(password)) {
@@ -86,7 +94,11 @@ const JoinForm = () => {
                 throw new Error(t('format_cellPhone'))
             } 
             
-           
+            /* 회원가입약관 동의 여부 체크 */
+            if (!form.agree) {
+                throw new Error(t('assertTrue_join_agree'))
+            }
+            
             (async() => {
                 try {
                      /* 아이디 중복 여부 체크 */
@@ -134,7 +146,15 @@ const JoinForm = () => {
                     <input type="text" name="name" placeholder={t('name')} onChange={handleChange} />
                     <input type="text" name="cellPhone" placeholder={t('cellPhone')} onChange={handleChange} />
                     {message && <ErrorMessage>{message}</ErrorMessage>}
-            
+
+                    <Title size='normal' underline={true} align='center'>{t('join_terms')}</Title>
+                    <TermsBox>
+                        회원가입 약관 출력
+                    </TermsBox>
+                    <TermsAgree onClick={toggleAgree}>
+                        {form.agree ? <FiCheckSquare /> : <FiSquare />}{t('join_agree_terms')}
+                    </TermsAgree>
+
                     <StyledButton1 type="submit" disabled={processing}>{t('join')}</StyledButton1>
                     
                 </form>
