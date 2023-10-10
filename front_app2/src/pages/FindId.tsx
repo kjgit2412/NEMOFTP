@@ -6,7 +6,7 @@ const FindId = () => {
     return (
         <>
             <Helmet>
-                <title>{t('findId')}</title>
+                <title>{t('findId')} : NOVASEMI</title>
             </Helmet>
             <FindIdContainer />
         </>

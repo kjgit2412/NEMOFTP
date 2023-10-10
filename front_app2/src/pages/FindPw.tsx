@@ -1,5 +1,18 @@
+import { Helmet } from 'react-helmet-async'
+import FindPwContainer from '../containers/FindPwContainer'
+import { useTranslation } from 'react-i18next'
+
 const FindPw = () => {
-    return <h1>비밀번호 찾기</h1>
+    const { t } = useTranslation()
+
+    return (
+        <>
+            <Helmet>
+                <title>{t('findPw')} : NOVASEMI</title>
+            </Helmet>
+            <FindPwContainer />
+        </>
+    )
 }
 
 export default FindPw

@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate, Link } from 'react-router-dom'
-import { FiLock, FiKey, FiUserPlus } from 'react-icons/fi'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import Title from '../common/Title'
 import StyledButton1 from '../common/StyledButton1'
 import ErrorMessage from '../common/ErrorMessage'
@@ -15,28 +13,7 @@ import { updateUserInfo } from '../../modules/user'
 import { getLoginInfo } from '../../api/member/login'
 import { UserInfo } from '../../modules/userTypes'
 import cookie from 'react-cookies'
-
-
-const Links = styled.div`
-    display: flex;
-    padding: 10px;
-    background: #fff;
-    border-bottom: 1px solid #d5d5d5;
-    a {
-      flex-grow: 1; 
-      width: 0;
-      text-align: center;
-      svg { 
-        vertical-align: middle;
-        position: relative; 
-        top: -2px;
-        margin-right: 3px;
-      }
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-`;
+import LinksTab from './LinksTab'
 
 const LoginForm = () => {
   const { t } = useTranslation()
@@ -130,20 +107,7 @@ const LoginForm = () => {
               {message && <ErrorMessage>{message}</ErrorMessage>}
               <StyledButton1 type="submit">{t('login')}</StyledButton1>
           </form>
-          <Links>
-            <Link to="/findId">
-              <FiLock />
-              {t('findId')}
-            </Link>
-            <Link to="/findPw">
-              <FiKey />
-              {t('findPw')}
-            </Link>
-            <Link to="/join">
-              <FiUserPlus />
-              {t('join')}
-            </Link>
-          </Links>
+          <LinksTab />
         </InnerBox>
       </OuterBox>
     </>

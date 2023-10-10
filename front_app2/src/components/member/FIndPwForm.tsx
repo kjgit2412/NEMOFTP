@@ -5,31 +5,34 @@ import Title from '../common/Title'
 import ErrorMessage from '../common/ErrorMessage'
 import StyledButton1 from '../common/StyledButton1'
 import LinksTab from './LinksTab'
+import { useTransition } from 'react'
 
 type Inputs = {
-    name: string
-    cellPhone: string
+    email: String,
+    name: String
 }
-const FindIdForm = () => {
+const FindPwForm = () => {
+
     const { t } = useTranslation()
 
-    const { register, handleSubmit, formState: { errors }} = useForm<Inputs>()
+    const { register, handleSubmit, formState : { errors}} = useForm<Inputs>()
 
-   const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data) 
-   }
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        console.log(data)
+    }
+
 
     return (
         <>
             <OuterBox className="layout_width content_box">
                 <InnerBox>
-                    <Title align="center">{t('findId')}</Title>
+                    <Title align="center">{t('findPw')}</Title>
                     <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
-                        <input {...register("name",  {required: true})} placeholder={t('name')} />
+                        <input {...register("email",  {required: true})} placeholder={t('email')} />
+                        {errors.email && <ErrorMessage>{t('required_email')}</ErrorMessage>}
+                        <input {...register("name", { required: true})} placeholder={t('name')} />
                         {errors.name && <ErrorMessage>{t('required_name')}</ErrorMessage>}
-                        <input {...register("cellPhone", { required: true})} placeholder={t('cellPhone')} />
-                        {errors.cellPhone && <ErrorMessage>{t('required_cellPhone')}</ErrorMessage>}
-                        <StyledButton1>{t('findId')}</StyledButton1>
+                        <StyledButton1>{t('findPw')}</StyledButton1>
                     </form>
                     <LinksTab />
                 </InnerBox>
@@ -38,4 +41,4 @@ const FindIdForm = () => {
     )
 }
 
-export default FindIdForm
+export default FindPwForm
