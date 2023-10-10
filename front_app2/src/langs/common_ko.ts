@@ -1,11 +1,17 @@
 export default { 
-    // 공통
+    // 공통 - 회원
     email: "이메일",
     password: "비밀번호",
     confirmPassword: "비밀번호 확인",
     name: "회원이름",
     cellPhone: "휴대전화번호",
     
+    // 공통 - 버튼
+    btn_save: "저장하기",
+    btn_confirm: "확인하기",
+    btn_reset: "다시입력",
+    btn_cancel: "취소하기",
+
     // 회원가입
     join: "회원가입",
     join_title: "회원가입",
@@ -29,5 +35,9 @@ export default {
     // 관리자 메뉴
     menu_config: "사이트 설정",
     menu_member: "회원관리",
+    
+    // 기본 설정
+    config_join_terms: "회원가입약관",
+    config_site_title: "기본 사이트명",
 
 } as {}

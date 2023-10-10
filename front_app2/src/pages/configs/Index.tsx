@@ -1,5 +1,17 @@
+import { Helmet } from "react-helmet-async"
+import { useTranslation } from "react-i18next"
+import IndexContainer from "../../containers/admin/configs/IndexContainer"
+
 const Index = () => {
-    return <h1>사이트 설정 메인</h1>
+    const { t } = useTranslation()
+    return (
+        <>
+            <Helmet>
+                <title>{t('menu_config')} : NOVASEMI</title>
+            </Helmet>
+            <IndexContainer />
+        </>
+    )
 }
 
 export default Index

@@ -43,7 +43,11 @@ public class SecurityConfig {
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(c -> {
                     c.requestMatchers("/error",
-                                    "/api/v1/member/token", "/api/v1/member/login", "/api/v1/member/exists/**", "/api/v1/member").permitAll()
+                                    "/api/v1/member/token",
+                                    "/api/v1/member/login",
+                                    "/api/v1/member/exists/**",
+                                    "/api/v1/member",
+                                    "/api/v1/config/info").permitAll()
                             .anyRequest().authenticated();
 
 
