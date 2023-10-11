@@ -12,6 +12,10 @@ export default {
     btn_reset: "다시입력",
     btn_cancel: "취소하기",
 
+    // 공통 - 처리
+    saved: "저장되었습니다",
+    fail_save: "저장에 실패하였습니다.",
+
     // 회원가입
     join: "회원가입",
     join_title: "회원가입",

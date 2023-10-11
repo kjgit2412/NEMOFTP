@@ -28,7 +28,7 @@ const validationFields = {
     name : "" as string
 }
 
-const JoinForm = () => {
+const JoinForm = ({joinTerms}) => {
     
     const { t } = useTranslation()
     const navigate = useNavigate()
@@ -147,10 +147,8 @@ const JoinForm = () => {
                     <input type="text" name="cellPhone" placeholder={t('cellPhone')} onChange={handleChange} />
                     {message && <ErrorMessage>{message}</ErrorMessage>}
 
-                    <Title size='normal' underline={true} align='center'>{t('join_terms')}</Title>
-                    <TermsBox>
-                        회원가입 약관 출력
-                    </TermsBox>
+                    <Title size='normal' bottomline="true" align='center'>{t('join_terms')}</Title>
+                    <TermsBox>{joinTerms}</TermsBox>
                     <TermsAgree onClick={toggleAgree}>
                         {form.agree ? <FiCheckSquare /> : <FiSquare />}{t('join_agree_terms')}
                     </TermsAgree>

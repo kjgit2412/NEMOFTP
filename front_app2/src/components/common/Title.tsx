@@ -4,7 +4,7 @@ import fontSizes from '../../styles/fontSizes';
 type StyleProps = {
   align?: string
   size?: string
-  underline?: boolean
+  bottomline?: string
 }
 
 const Title = styled.h1<StyleProps>`
@@ -16,7 +16,7 @@ const Title = styled.h1<StyleProps>`
     css`
       text-align: ${props.align};
     `}
-  ${(props) => props.underline && css`
+  ${(props) => props.bottomline && css`
       border-bottom: 1px solid #212121;
   `}
 `;

@@ -17,7 +17,7 @@ import java.util.Map;
 public class ConfigController {
     private final ConfigSaveService saveService;
     private final ConfigInfoService infoService;
-    private String configKey = "siteCofnig";
+    private String configKey = "siteConfig";
 
     /**
      * 사이트 설정 조회

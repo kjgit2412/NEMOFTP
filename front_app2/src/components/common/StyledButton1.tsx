@@ -10,7 +10,7 @@ type ButtonProps = ButtonHTMLAttributes<any> & {
   fcolor?: string
   width?: string
   height?: string
-  borderColor?: string
+  bordercolor?: string
 }
 
 const StyledButton1 = styled.button<ButtonProps>`
@@ -26,8 +26,8 @@ const StyledButton1 = styled.button<ButtonProps>`
   cursor: pointer;
   transition: all 0.5s ease-in;
   
-  ${props => props.borderColor && css`
-      border: 1px solid ${props.borderColor};
+  ${props => props.bordercolor && css`
+      border: 1px solid ${props.bordercolor};
   `}
 
 

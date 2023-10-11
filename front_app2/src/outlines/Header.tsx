@@ -14,9 +14,9 @@ const Box = styled.header`
   left: 0; 
   width: 100%; 
   background: #36466d;
-  padding: 10px 0;
+  padding: 10px 15px;
   min-width: 1200px;
-  .layout_width {
+  .inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -79,7 +79,7 @@ const Header = ({ isLogin, userInfo, logout }: headerProps ): JSX.Element => {
   return (
     <>
     <Box>
-      <div className="layout_width">
+      <div className='inner'>
         <div className="left">
         <Link to="/" className="logo">
           <img src={logo} alt="logo" />

@@ -6,5 +6,5 @@ package org.nemoftp.api.controllers.dtos;
  * @param joinTerms
  */
 public record RequestSiteConfig(
-        String siteTItle,
+        String siteTitle,
         String joinTerms) {}

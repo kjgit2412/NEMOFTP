@@ -1,18 +1,21 @@
+import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import FindPwContainer from '../containers/FindPwContainer'
 import { useTranslation } from 'react-i18next'
 
-const FindPw = () => {
+const FindPw = ({siteTitle}) => {
     const { t } = useTranslation()
 
     return (
         <>
             <Helmet>
-                <title>{t('findPw')} : NOVASEMI</title>
+                <title>{t('findPw')} : {siteTitle}</title>
             </Helmet>
             <FindPwContainer />
         </>
     )
 }
 
-export default FindPw
+export default connect(
+    (state: any) => ({ siteTitle: state.config.siteTitle })
+)(FindPw)

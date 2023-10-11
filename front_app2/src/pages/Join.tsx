@@ -1,15 +1,20 @@
-import { Helmet } from 'react-helmet-async';
-import JoinContainer from '../containers/JoinContainer';
+import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
+import JoinContainer from '../containers/JoinContainer'
 
-const Join = (): JSX.Element => {
+const Join = ({ siteTitle }): JSX.Element => {
+  const { t } = useTranslation()
   return (
     <>
       <Helmet>
-        <title>회원가입 : NOVASEMI</title>
+        <title>{t('join_title')} : {siteTitle}</title>
       </Helmet>
       <JoinContainer />
     </>
   );
 };
 
-export default Join;
+export default connect(
+  (state: any) => ({ siteTitle: state.config.siteTitle })
+)(Join);

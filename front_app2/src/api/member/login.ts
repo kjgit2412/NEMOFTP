@@ -26,11 +26,8 @@ export const getLoginInfo = () : Promise<UserInfo> => new Promise<UserInfo>((res
         reject("login.fail")
         return;
     }
-    const headers = {
-        Authorization : `Bearer ${token}`
-    }
 
-    return apiRequest("/member/info", "GET", {}, headers)
+    return apiRequest("/member/info", "GET")
         .then((res) => {
             if (res.data.success) {
                 const data = res.data.data;
