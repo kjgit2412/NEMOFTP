@@ -24,9 +24,34 @@ export const TableCols = styled.table<TableColsProps>`
 `;
 
 type TableRowsProps = TableHTMLAttributes<any> & {
-
+    width? : number
 }
 
 export const TableRows = styled.table<TableRowsProps>`
-    
+    width: 100%;
+    thead {
+        th {
+            background: #f8f8f8;
+            font-weight: normal;
+            padding: 10px 0;
+            border: 1px solid #d5d5d5;
+            border-left: 0; 
+            border-right: 0;
+            svg {
+                font-size: 1.5rem;
+                vertical-align: middle;
+            }
+        }
+    }   
+    tbody {
+        td {
+            border-bottom: 1px solid #d5d5d5;
+        }
+    }
+    .w250 { 
+        width: 200px;
+    }
+    .w40 {
+        width: 40px;
+    }
 `

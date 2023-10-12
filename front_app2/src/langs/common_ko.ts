@@ -38,10 +38,13 @@ export default {
 
     // 관리자 메뉴
     menu_config: "사이트 설정",
-    menu_member: "회원관리",
-    
+    menu_member: "회원 관리",
+    menu_ftp_files: "파일 업로드 관리",
+
     // 기본 설정
     config_join_terms: "회원가입약관",
     config_site_title: "기본 사이트명",
 
+    // 회원 관리
+    member_list: "회원 목록",
 } as {}

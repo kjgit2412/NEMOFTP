@@ -16,5 +16,5 @@ const Join = ({ siteTitle }): JSX.Element => {
 };
 
 export default connect(
-  (state: any) => ({ siteTitle: state.config.siteTitle })
+  (state: any) => ({ siteTitle: state.config.siteTitle || '' })
 )(Join);

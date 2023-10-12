@@ -17,5 +17,5 @@ const Index = ({siteTitle}) => {
 }
 
 export default connect(
-    (state: any) => ({siteTitle: state.config.siteTitle}),
+    (state: any) => ({siteTitle: state.config.siteTitle || '' }),
 )(Index)

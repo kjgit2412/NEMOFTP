@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { MdSettingsApplications, MdOutlineManageAccounts } from 'react-icons/md'
+import { MdSettingsApplications, MdOutlineManageAccounts, MdUploadFile } from 'react-icons/md'
 import classNames from 'classnames'
 
 const SideBox = styled.aside`
@@ -38,6 +38,10 @@ const Side = () => {
             <NavLink to="/member" className={classNames('menu')}>
                 <MdOutlineManageAccounts />
                 {t('menu_member')}
+            </NavLink>
+            <NavLink to="/ftp_files" className={classNames('menu')}>
+                <MdUploadFile />
+                {t('menu_ftp_files')}
             </NavLink>
         </SideBox>
     )

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import IndexContainer from '../../containers/admin/members/IndexContainer'
-const Index = ({siteTitle}) => {
+const Index = ({siteTitle}) : JSX.Element => {
     const { t } = useTranslation()
 
     return (
@@ -16,5 +16,5 @@ const Index = ({siteTitle}) => {
 }
 
 export default connect(
-    (state: any) => ({ siteTitle: state.config.siteTitle })
+    (state: any) => ({ siteTitle: state.config.siteTitle || '' })
 )(Index)

@@ -10,12 +10,15 @@ public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslP
     @EntityGraph(attributePaths = "authorities")
     Member findByEmail(String email);
 
+
     /**
      * 등록된 회원인지 체크
      * @param email
      * @return
      */
     default boolean exists(String email) {
+
         return exists(QMember.member.email.eq(email));
+
     }
 }

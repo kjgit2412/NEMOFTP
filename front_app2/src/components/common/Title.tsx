@@ -5,6 +5,7 @@ type StyleProps = {
   align?: string
   size?: string
   bottomline?: string
+  margin?: string
 }
 
 const Title = styled.h1<StyleProps>`
@@ -18,6 +19,11 @@ const Title = styled.h1<StyleProps>`
     `}
   ${(props) => props.bottomline && css`
       border-bottom: 1px solid #212121;
+      margin-bottom: 20px;
+  `}
+
+  ${(props) => props.margin && css`
+    margin: ${props.margin};
   `}
 `;
 
