@@ -1,5 +1,6 @@
 package org.nemoftp.commons.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class Pagination {
 
     private String baseUrl; // 기본 페이지 URL;
 
+    @JsonIgnore
     private HttpServletRequest request;
 
     /**

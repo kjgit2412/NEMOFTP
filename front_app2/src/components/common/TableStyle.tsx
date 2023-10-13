@@ -15,9 +15,11 @@ export const TableCols = styled.table<TableColsProps>`
         font-weight: normal;
         border-right: 1px solid #d5d5d5;
     }
+    
     td { 
         padding: 10px;
     }
+
     th, td { 
         border-bottom: 1px solid #d5d5d5;
     }
@@ -40,12 +42,20 @@ export const TableRows = styled.table<TableRowsProps>`
             svg {
                 font-size: 1.5rem;
                 vertical-align: middle;
+                cursor: pointer;
             }
         }
     }   
     tbody {
         td {
             border-bottom: 1px solid #d5d5d5;
+            text-align: center;
+            padding: 10px 0;
+            svg {
+                font-size: 1.5rem;
+                vertical-align: middle;
+                cursor: pointer;
+            }
         }
     }
     .w250 { 

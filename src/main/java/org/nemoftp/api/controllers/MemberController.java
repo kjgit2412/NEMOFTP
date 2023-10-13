@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.nemoftp.api.controllers.dtos.JSONData;
-import org.nemoftp.api.controllers.dtos.RequestJoin;
-import org.nemoftp.api.controllers.dtos.RequestLogin;
-import org.nemoftp.api.controllers.dtos.ResponseLogin;
+import org.nemoftp.api.controllers.dtos.*;
 import org.nemoftp.commons.exceptions.BadRequestException;
 import org.nemoftp.entities.Member;
 import org.nemoftp.jwt.CustomJwtFilter;
@@ -92,7 +89,7 @@ public class MemberController {
     @GetMapping("/info")
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public JSONData<Member> myinfo(@AuthenticationPrincipal MemberInfo memberInfo) {
-       Member member = memberInfo.getMember();
+        Member member = memberInfo.getMember();
         JSONData<Member> data = new JSONData<>();
         data.setSuccess(true);
         data.setData(member);
@@ -100,5 +97,14 @@ public class MemberController {
         return data;
     }
 
+    @GetMapping("/list")
+    public JSONData<ListData<Member>> getMembers(RequestMembers params) {
+        ListData<Member> listData = infoService.getMembers(params);
 
+        JSONData<ListData<Member>> data = new JSONData<>();
+        data.setSuccess(true);
+        data.setData(listData);
+
+        return data;
+    }
 }

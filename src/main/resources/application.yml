@@ -30,6 +30,11 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddlAuto: update
+  # 잭슨 설정
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
 logging:
   level:
     org:
@@ -37,6 +42,8 @@ logging:
         type:
           descriptor:
             sql: trace
+
+
 
 # 파일 업로드 경로 설정
 file:

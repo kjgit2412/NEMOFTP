@@ -27,3 +27,14 @@ export type LoginFormType = {
     email : string
     password: string
 }
+
+// 검색 항목 타입
+export type UserSearchType = {
+    page: number
+    limit: number
+    sopt?: string // 검색 조건
+    skey?: string // 검색어 
+    email?: string
+    name?: string
+    cellPhone?: string
+}

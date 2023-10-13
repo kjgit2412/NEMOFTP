@@ -1,9 +1,11 @@
 package org.nemoftp.models.member;
 
 import com.querydsl.core.BooleanBuilder;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.nemoftp.api.controllers.dtos.ListData;
 import org.nemoftp.api.controllers.dtos.RequestMembers;
+import org.nemoftp.commons.utils.Pagination;
 import org.nemoftp.commons.utils.Utils;
 import org.nemoftp.entities.Member;
 import org.nemoftp.entities.QMember;
@@ -18,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +32,8 @@ import static org.springframework.data.domain.Sort.Order.desc;
 @RequiredArgsConstructor
 public class MemberInfoService implements UserDetailsService {
     private final MemberRepository repository;
+    private final HttpServletRequest request;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -58,7 +63,13 @@ public class MemberInfoService implements UserDetailsService {
         return repository.exists(email);
     }
 
-    public ListData<Member> getMembers(RequestMembers params) {
+    /**
+     * 회원 목록 조회
+     *
+     * @param params
+     * @return
+     */
+    public ListData<Member> getMembers(@RequestBody RequestMembers params) {
         int page = Utils.getNumber(Objects.requireNonNullElse(params.page(), 1), 1);
         int limit = Utils.getNumber(Objects.requireNonNullElse(params.limit(), 20), 20);
 
@@ -66,8 +77,13 @@ public class MemberInfoService implements UserDetailsService {
         QMember member = QMember.member;
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
 
-        Page<Member> data = repository.findAll(andBuilder, pageable);
+        Page<Member> result = repository.findAll(andBuilder, pageable);
+        ListData<Member> data = new ListData<>();
+        data.setContent(result.getContent());
+        int total = (int)result.getTotalElements();
+        Pagination pagination = new Pagination(page, total, 10, limit, request);
+        data.setPagination(pagination);
 
-        return null;
+        return data;
     }
 }
