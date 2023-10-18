@@ -99,6 +99,7 @@ public class MemberController {
 
     @GetMapping("/list")
     public JSONData<ListData<Member>> getMembers(RequestMembers params) {
+        log.info(params.toString());
         ListData<Member> listData = infoService.getMembers(params);
 
         JSONData<ListData<Member>> data = new JSONData<>();

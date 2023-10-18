@@ -11,6 +11,7 @@ type ButtonProps = ButtonHTMLAttributes<any> & {
   width?: string
   height?: string
   bordercolor?: string
+  center?: string
 }
 
 const StyledButton1 = styled.button<ButtonProps>`
@@ -30,7 +31,9 @@ const StyledButton1 = styled.button<ButtonProps>`
       border: 1px solid ${props.bordercolor};
   `}
 
-
+  ${props => props.center && css`
+    margin: 0 auto;
+  `}
   * {
     color: #fff;
     font-size: 1.5rem;

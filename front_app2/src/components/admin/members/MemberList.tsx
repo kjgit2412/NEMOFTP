@@ -7,6 +7,7 @@ import Title from "../../common/Title"
 import { TableRows } from "../../common/TableStyle"
 import { getUsers, initalUserSearchForm, ListDataType } from '../../../api/admin/user'
 import ErrorMessage from '../../common/ErrorMessage'
+import SearchForm from './SearchForm'
 import loadable from '@loadable/component'
 import { produce } from 'immer'
 
@@ -44,6 +45,9 @@ const MemberList = () => {
     const rows = listData.content.map((u: any) => <MemberRow key={u.seq} user={u} />)
     return (
         <>
+            <Title bottomline="true">{t('회원 검색')}</Title>
+            <SearchForm form={form} setForm={setForm} />
+
             <Title bottomline="true">{t('회원 목록')}</Title>
             <TableRows>
                 <thead>
@@ -64,10 +68,10 @@ const MemberList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                { rows ? rows : (<tr><td colSpan={11}><ErrorMessage>{t('조회된 데이터가 없습니다.')}</ErrorMessage></td></tr>) }
+                { rows && rows.length > 0 ? rows : (<tr><td colSpan={11}><ErrorMessage>{t('조회된 데이터가 없습니다.')}</ErrorMessage></td></tr>) }
                 </tbody>
             </TableRows>
-            { listData.pagination && <Pagination data={listData.pagination} url='/member' />}
+            { rows && rows.length > 0 && listData.pagination && <Pagination data={listData.pagination} url='/member' />}
         </>
     )
 }

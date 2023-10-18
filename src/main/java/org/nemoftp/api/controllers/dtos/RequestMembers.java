@@ -7,5 +7,10 @@ package org.nemoftp.api.controllers.dtos;
  */
 public record RequestMembers(
     Integer page,
-    Integer limit
+    Integer limit,
+    String sopt,
+    String skey,
+    String email,
+    String name,
+    String cellPhone
 ) {}

@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import loadable from '@loadable/component'
 import ConfigForm from "../../../components/admin/configs/ConfigForm"
 
 const IndexContainer = ({isLogin, config}) => {
     if (!isLogin) {
-        return <Navigate to="/login" replace={true} />
+        const LoginContainer = loadable(() => import('../../LoginContainer'))
+        return <LoginContainer />
     }
        
     return <ConfigForm config={config} />

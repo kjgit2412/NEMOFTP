@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
-import { Navigate } from 'react-router-dom'
 import MemberList from "../../../components/admin/members/MemberList"
 import { OuterBox  } from "../../../components/common/LayoutBox"
+import loadable from '@loadable/component'
 
 const IndexContainer = ({isLogin}) : JSX.Element => {
     if (!isLogin) {
-        return <Navigate to="/login" />
+        const LoginContainer = loadable(() => import('../../LoginContainer'))
+        return <LoginContainer />
     }
     
     return ( 

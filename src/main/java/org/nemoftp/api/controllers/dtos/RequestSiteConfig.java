@@ -2,7 +2,7 @@ package org.nemoftp.api.controllers.dtos;
 
 /**
  * 사이트 설정
- * @param siteTItle
+ * @param siteTitle
  * @param joinTerms
  */
 public record RequestSiteConfig(
