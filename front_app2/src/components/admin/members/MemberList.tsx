@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FiCheckSquare, FiSquare } from 'react-icons/fi'
 import { useTranslation } from "react-i18next"
@@ -10,7 +10,7 @@ import ErrorMessage from '../../common/ErrorMessage'
 import SearchForm from './SearchForm'
 import loadable from '@loadable/component'
 import { produce } from 'immer'
-
+import { UserInfo } from '../../../modules/userTypes'
 const MemberList = () => {
     const Pagination = loadable(() => import('../../common/Pagination'))
     const { t } = useTranslation()
@@ -42,7 +42,7 @@ const MemberList = () => {
         }) 
     }, [form])
 
-    const rows = listData.content.map((u: any) => <MemberRow key={u.seq} user={u} />)
+    const rows = listData.content.map((u: UserInfo) => <MemberRow key={u.seq} user={u} listData={listData} setListData={setListData} />)
     return (
         <>
             <Title bottomline="true">{t('회원 검색')}</Title>
@@ -76,10 +76,18 @@ const MemberList = () => {
     )
 }
 
-const MemberRow = ({user}) => {
+const MemberRow = ({user, listData, setListData}) => {
+    const toggleChecked = useCallback(() => {
+        setListData(produce((draft:any) => {
+            if (listData.content) {
+                draft.content = listData.content.map((u: UserInfo) => (u.seq === user.seq)? ({...u, checked : !u.checked}): ({...u}))
+            }
+        }))
+    }, [user]);
+
     return (
         <tr>
-            <td><FiSquare /></td>
+            <td onClick={toggleChecked}>{user.checked ? <FiCheckSquare /> : <FiSquare />}</td>
             <td>{user.seq}</td>
             <td>{user.email}</td>
             <td>{user.companyName}</td>

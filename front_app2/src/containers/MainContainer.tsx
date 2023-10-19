@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { Navigate } from 'react-router-dom'
 import classNames from 'classnames'
+import loadable from '@loadable/component'
 
 type MainProps = {
     isLogin : boolean
@@ -8,7 +8,8 @@ type MainProps = {
 
 const MainContainer = ({ isLogin } : MainProps) : JSX.Element => {
     if (!isLogin) {
-        return <Navigate to="/login" replace={true} />
+        const LoginController = loadable(() => import('../containers/LoginContainer'))
+        return <LoginController />
     }
     return (
         <div className={classNames('content_box', {layout_width: !isLogin})}>

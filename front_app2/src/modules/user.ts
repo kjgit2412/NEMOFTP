@@ -18,6 +18,7 @@ const initialState: UserInitialState = {
     company: '',
     department: '',
     cellPhone: '',
+    checked : false
   },
 }
 

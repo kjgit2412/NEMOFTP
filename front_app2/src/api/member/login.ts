@@ -39,7 +39,8 @@ export const getLoginInfo = () : Promise<UserInfo> => new Promise<UserInfo>((res
                     type: '',
                     company: data.companyName,
                     department: data.department,
-                    cellPhone: data.cellPhone
+                    cellPhone: data.cellPhone,
+                    checked: false
                 }
     
                 resolve(userInfo)

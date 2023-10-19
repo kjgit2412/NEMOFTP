@@ -26,20 +26,28 @@ const SearchForm = ({form, setForm}) : JSX.Element => {
                     <td>
                         <input type="text" name="email" onChange={onChange} />
                     </td>
+                </tr>
+                <tr>
+                    <th>${t('키워드 검색')}</th>
+                    <td className='grouping'>
+                        <select name="sopt" onChange={onChange}>
+                            <option value="all">{t('통합검색')}</option>
+                            <option value="name">{t('회원명')}</option>
+                            <option value="email">{t('이메일')}</option>
+                            <option value="cellPhone">{t('휴대전화번호')}</option>
+                            <option value="company_name">{t('회사명')}</option>
+                            <option value="department">{t('부서명')}</option>
+                        </select>
+                        <input type="text" name="sopt" onChange={onChange} />
+                    </td>
                     <th>{t('휴대전화번호')}</th>
                     <td>
                         <input type="text" name="cellPhone" onChange={onChange} />
                     </td>
                 </tr>
-                <tr>
-                    <th>${t('키워드 검색')}</th>
-                    <td colSpan={5}>
-
-                    </td>
-                </tr>
                 </tbody>
             </TableCols>
-            <StyledButton1 type='submit' width='300px' center="true">{t('조회하기')}</StyledButton1>
+            <StyledButton1 className="mt20" type='submit' width='300px' center="true">{t('조회하기')}</StyledButton1>
         </form>
     )
 }

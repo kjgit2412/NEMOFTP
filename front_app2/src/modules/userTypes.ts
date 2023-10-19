@@ -1,12 +1,14 @@
 export interface UserInfo {
     token?: string
+    seq?: number
     userNo: number
     email: string
     userNm: string
     type: string
     company: string
     department: string
-    cellPhone: string
+    cellPhone: string,
+    checked: boolean
 }
 export type UserActionType = 'user/UPDATE' | 'user/LOGOUT' | 'user/INFO'
 export type UserInitialState = {

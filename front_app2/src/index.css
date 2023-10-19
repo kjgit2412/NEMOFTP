@@ -14,6 +14,10 @@ dl, dt, dd { margin: 0; padding: 0; }
 .w200 { width: 200px !important; }
 .w300 { width: 300px !important }
 
+/* 공통 여백 */
+.mt20 { margin-top: 20px !important; }
+.mb20 { margin-bottom: 20px !important; }
+
 /* 정렬 */
 .ac { text-align: center; }
 .al { text-align: left; }

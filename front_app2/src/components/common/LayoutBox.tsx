@@ -32,6 +32,24 @@ export const OuterBox = styled.div<StyleProps>`
     resize: none;
     padding: 10px;
   }
+  select {
+    width: 100%;
+    border: 1px solid #d5d5d5;
+    height: 45px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    font-size: 1.15rem;
+  }
+  .grouping {
+    display: flex;
+  }
+  .grouping > * { 
+    width: 0; 
+    flex-grow: 1;
+  }
+  .grouping > * + * { 
+    margin-left: 5px;
+  }
 `;
 
 export const InnerBox = styled.div<StyleProps>`
