@@ -23,6 +23,7 @@ import ConfigIndex from './pages/configs/Index'
 
 /* 회원관리 */
 import MemberIndex from './pages/members/Index'
+import MemberInfo from './pages/members/Info'
 
 /* 파일 업로드 관리 */
 import FtpFileIndex from './pages/ftpFiles/Index'
@@ -60,6 +61,7 @@ const App = (): JSX.Element => {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/config" element={<ConfigIndex />} />
           <Route path="/member" element={<MemberIndex />} />
+          <Route path="/member/:seq" element={<MemberInfo />} />
           <Route path="/ftp_files" element={<FtpFileIndex />} />
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -14,7 +14,7 @@ public class Member extends CommonInfo {
     @Id
     @GeneratedValue
     private Long seq; // 회원번호
-    @Column(length=80, unique = true, nullable = false)
+    @Column(length=80, unique = true, nullable = false)  
     private String email;
 
     @JsonIgnore

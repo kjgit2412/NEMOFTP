@@ -3,6 +3,7 @@ package org.nemoftp.models.member;
 import com.querydsl.core.BooleanBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.nemoftp.api.controllers.dtos.ListData;
 import org.nemoftp.api.controllers.dtos.RequestMembers;
 import org.nemoftp.commons.utils.Pagination;
@@ -28,6 +29,7 @@ import java.util.Objects;
 
 import static org.springframework.data.domain.Sort.Order.desc;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberInfoService implements UserDetailsService {
@@ -75,6 +77,58 @@ public class MemberInfoService implements UserDetailsService {
 
         BooleanBuilder andBuilder = new BooleanBuilder();
         QMember member = QMember.member;
+
+        /* 검색 조건 처리 S */
+        String email = params.email();
+        String name = params.name();
+        String cellPhone = params.cellPhone();
+        String sopt = params.sopt();
+        String skey = params.skey();
+
+        // 이메일 검색 처리
+        if (email != null && !email.isBlank()) {
+            andBuilder.and(member.email.contains(email.trim()));
+        }
+
+        // 회원명 검색 처리
+        if (name != null && !name.isBlank()) {
+            andBuilder.and(member.name.contains(name.trim()));
+        }
+
+        // 휴대전화번호 검색 처리
+        if (cellPhone != null && !cellPhone.trim().isBlank()) {
+            cellPhone = cellPhone.replaceAll("\\D", "");
+            andBuilder.and(member.cellPhone.contains(cellPhone));
+        }
+
+        // 키워드 검색 처리
+        if (sopt != null && !sopt.trim().isBlank() && skey != null && !skey.trim().isBlank()) {
+            skey = skey.trim();
+            if (skey.equals("all")) { // 통합검색
+                String _cellPhone = skey.replaceAll("\\D", "");
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                orBuilder.or(member.name.contains(skey))
+                        .or(member.email.contains(skey))
+                        .or(member.cellPhone.contains(skey))
+                        .or(member.cellPhone.contains(_cellPhone))
+                        .or(member.companyName.contains(skey))
+                        .or(member.department.contains(skey));
+                andBuilder.and(orBuilder);
+            } else if (skey.equals("name")) { // 회원명
+                andBuilder.and(member.name.contains(skey));
+            } else if (skey.equals("email")) { // 이메일
+                andBuilder.and(member.email.contains(skey));
+            } else if (skey.equals("cellPhone")) { // 휴대전화번호
+                skey = skey.replaceAll("\\D", "");
+                andBuilder.and(member.cellPhone.contains(skey));
+            } else if (skey.equals("company_name")) { // 회사명
+                andBuilder.and(member.companyName.contains(skey));
+            } else if (skey.equals("department")) { // 부서명
+                andBuilder.and(member.department.contains(skey));
+            }
+        }
+        /* 검색 조건 처리 E */
+
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
 
         Page<Member> result = repository.findAll(andBuilder, pageable);

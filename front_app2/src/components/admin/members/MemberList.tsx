@@ -5,6 +5,7 @@ import { FiCheckSquare, FiSquare } from 'react-icons/fi'
 import { useTranslation } from "react-i18next"
 import Title from "../../common/Title"
 import { TableRows } from "../../common/TableStyle"
+import StyledButton2 from '../../common/StyledButton2'
 import { getUsers, initalUserSearchForm, ListDataType } from '../../../api/admin/user'
 import ErrorMessage from '../../common/ErrorMessage'
 import SearchForm from './SearchForm'
@@ -16,7 +17,7 @@ const MemberList = () => {
     const { t } = useTranslation()
     const [ searchParams ] = useSearchParams()
     const page = searchParams.get("page") || '1'
-
+    
     initalUserSearchForm.page = parseInt(page)
     const [ form, setForm ] = useState(initalUserSearchForm)
     const [ listData, setListData ] = useState({
@@ -25,6 +26,7 @@ const MemberList = () => {
     } as ListDataType)
 
     const [ message, setMessage ] = useState('')
+    const [ selectedAll, setSelectedAll ] = useState(false)
 
     useEffect(() => {
         getUsers(form)
@@ -42,7 +44,17 @@ const MemberList = () => {
         }) 
     }, [form])
 
+    const toggleCheckedAll = useCallback(e => {
+        setListData(produce((draft: any) => {
+            if (listData.content) {
+                draft.content = listData.content.map((u: UserInfo) => ({...u, checked : !selectedAll}))
+                setSelectedAll(!selectedAll)
+            }
+        }))
+    }, [listData])
+
     const rows = listData.content.map((u: UserInfo) => <MemberRow key={u.seq} user={u} listData={listData} setListData={setListData} />)
+    
     return (
         <>
             <Title bottomline="true">{t('회원 검색')}</Title>
@@ -52,8 +64,8 @@ const MemberList = () => {
             <TableRows>
                 <thead>
                     <tr>
-                        <th className="w40">
-                            <FiSquare />
+                        <th className="w40" onClick={toggleCheckedAll}>
+                            {selectedAll ? <FiCheckSquare /> : <FiSquare />}
                         </th>
                         <th>{t('회원번호')}</th>
                         <th>{t('이메일')}</th>
@@ -77,6 +89,7 @@ const MemberList = () => {
 }
 
 const MemberRow = ({user, listData, setListData}) => {
+    const { t } = useTranslation()
     const toggleChecked = useCallback(() => {
         setListData(produce((draft:any) => {
             if (listData.content) {
@@ -84,7 +97,7 @@ const MemberRow = ({user, listData, setListData}) => {
             }
         }))
     }, [user]);
-
+    const infoUrl = `/member/${user.seq}`
     return (
         <tr>
             <td onClick={toggleChecked}>{user.checked ? <FiCheckSquare /> : <FiSquare />}</td>
@@ -98,7 +111,7 @@ const MemberRow = ({user, listData, setListData}) => {
             <td>{user.credentialExpired ? 'Y' : 'N'}</td>
             <td>{user.enabled ? 'Y' : 'N'}</td>
             <td>
-
+                <StyledButton2 to={infoUrl}>{t('회원정보수정')}</StyledButton2>
             </td>
         </tr>
     )
