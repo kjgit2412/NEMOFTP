@@ -57,6 +57,17 @@ public class MemberInfoService implements UserDetailsService {
     }
 
     /**
+     * 회원번호로 회원 조회
+     *
+     * @param seq
+     * @return
+     */
+    public Member getMember(Long seq) {
+        Member member = repository.findById(seq).orElseThrow(MemberNotFoundException::new);
+
+        return member;
+    }
+    /**
      * 등록회원인지 이메일로 체크
      * @param email
      * @return

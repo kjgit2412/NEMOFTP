@@ -97,7 +97,20 @@ public class MemberController {
         return data;
     }
 
+    @GetMapping("/info/{seq}")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+    public JSONData<Member> userInfo(@PathVariable Long seq) {
+        JSONData<Member> data = new JSONData<>();
+        Member member = infoService.getMember(seq);
+        data.setData(member);
+        data.setSuccess(true);
+        
+        return data;
+    }
+
+
     @GetMapping("/list")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public JSONData<ListData<Member>> getMembers(RequestMembers params) {
         log.info(params.toString());
         ListData<Member> listData = infoService.getMembers(params);
