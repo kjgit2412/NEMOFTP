@@ -5,13 +5,17 @@ import LoginContainer from '../../LoginContainer'
 import InfoForm from '../../../components/admin/members/InfoForm'
 import { OuterBox } from '../../../components/common/LayoutBox'
 import { getUser } from '../../../api/admin/user'
-
+import Loading from '../../../components/common/Loading'
 const InfoContainer = ({isLogin}) => {
-    const [userInfo, setUserInfo ] = useState(null);
+    const [ userInfo, setUserInfo ] = useState(null)
+    const [ loading, setLoading ] = useState(true)
     const { seq } = useParams()
     useEffect(() => {
        getUser(Number(seq))
-        .then((user: any) => setUserInfo(user))
+        .then((user: any) => {
+            setUserInfo(user)
+            setLoading(false)
+        })
         .catch(err => console.error(err))
     }, []);
 
@@ -22,7 +26,7 @@ const InfoContainer = ({isLogin}) => {
 
     return (
         <OuterBox className="content_box">
-            <InfoForm />
+            {loading ? <Loading /> : <InfoForm userInfo={userInfo} />}
         </OuterBox>
     )
 }

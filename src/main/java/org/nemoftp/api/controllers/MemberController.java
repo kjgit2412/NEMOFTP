@@ -104,7 +104,7 @@ public class MemberController {
         Member member = infoService.getMember(seq);
         data.setData(member);
         data.setSuccess(true);
-        
+
         return data;
     }
 
