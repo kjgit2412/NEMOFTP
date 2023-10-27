@@ -18,6 +18,8 @@ dl, dt, dd { margin: 0; padding: 0; }
 .mt20 { margin-top: 20px !important; }
 .mb20 { margin-bottom: 20px !important; }
 
+.mr10 { margin-right: 10px !important; }
+
 /* 정렬 */
 .ac { text-align: center; }
 .al { text-align: left; }
